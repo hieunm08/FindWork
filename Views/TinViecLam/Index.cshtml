@@ -1,0 +1,281 @@
+﻿@model Model.EF.SearchHomeModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="home-section section-hero overlay bg-image" style="background-image: url('../../Assets/Client/images/hero_1.jpg');" id="home-section">
+
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-12">
+                <div class="mb-5 text-center">
+                    <h1 class="text-white font-weight-bold">The Easiest Way To Get Your Dream Job</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur perferendis.</p>
+                </div>
+                <form method="post" class="search-jobs-form">
+                    @using (Html.BeginForm("Index", "SearchTinTuc", FormMethod.Get))
+                    {@Html.AntiForgeryToken()
+
+
+
+                    <div class="row mb-5">
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                            <input type="text" id="tencongty" class="form-control form-control-lg" placeholder="Ten Công Ty">
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                            @Html.DropDownList("ID_ThanhPho", (SelectList)ViewBag.ThanhPho, "Chọn Thành Phố ", new { id = "ThanhPho", @class = "selectpicker" })
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                            @Html.DropDownList("ID.NganhNghe", (SelectList)ViewBag.NganhNghe, "Chọn Nganh Nghe ", new { id = "NganhNghe", @class = "selectpicker" })
+
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block text-white btn-search"><span class="icon-search icon mr-2"></span>Search Job</button>
+                        </div>
+                    </div>
+                }
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <a href="#next" class="scroll-button smoothscroll">
+        <span class=" icon-keyboard_arrow_down"></span>
+    </a>
+
+</section>
+
+<section class="py-5 bg-image overlay-primary fixed overlay" id="next" style="background-image: url('images/hero_1.jpg');">
+    <div class="container">
+        <div class="row mb-5 justify-content-center">
+            <div class="col-md-7 text-center">
+                <h2 class="section-title mb-2 text-white">JobBoard Site Stats</h2>
+                <p class="lead text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita unde officiis recusandae sequi excepturi corrupti.</p>
+            </div>
+        </div>
+        <div class="row pb-0 block__19738 section-counter">
+
+
+            @{
+                var count = 0;
+                foreach (var item in Model.CvUngviens)
+                {
+                    count += 1;
+                }
+                <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                    <div class="d-flex align-items-center justify-content-center mb-2">
+                        <strong class="number" data-number="@(count)">@(count)</strong>
+                    </div>
+                    <span class="caption">SỐ LƯỢNG CV ỨNG VIÊN</span>
+                </div>
+            }
+
+            @{
+                var count1 = 0;
+                foreach (var item in Model.TinViecLams)
+                {
+                    count1 += 1;
+                }
+                <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                    <div class="d-flex align-items-center justify-content-center mb-2">
+                        <strong class="number" data-number="@(count1)">@(count1)</strong>
+                    </div>
+                    <span class="caption">Việc Làm</span>
+                </div>
+            }
+
+            @{
+                var count2 = 0;
+                foreach (var item in Model.CongTys)
+                {
+                    count2 += 1;
+                }
+                <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                    <div class="d-flex align-items-center justify-content-center mb-2">
+                        <strong class="number" data-number="@(count2)">@(count2)</strong>
+                    </div>
+                    <span class="caption">Công Ty tuyển dụng</span>
+                </div>
+            }
+
+            @{
+                var count3 = 0;
+                foreach (var item in Model.Ungviens)
+                {
+                    count3 += 1;
+                }
+                <div class="col-6 col-md-6 col-lg-3 mb-5 mb-lg-0">
+                    <div class="d-flex align-items-center justify-content-center mb-2">
+                        <strong class="number" data-number="@(count3)">@(count3)</strong>
+                    </div>
+                    <span class="caption"> Ứng Viên Ứng Tuyển</span>
+                </div>
+            }
+
+
+
+
+        </div>
+    </div>
+</section>
+
+
+
+<section class="site-section">
+    <div class="container">
+
+        <div class="row mb-5 justify-content-center">
+            <div class="col-md-7 text-center">
+                <h2 class="section-title mb-2">@count1 Số tin được đăng</h2>
+            </div>
+        </div>
+
+
+        <table class="display" id="MyDataTable1">
+            <thead>
+                <tr>
+                    <th scope="col">Công Ty</th>
+                    <th scope="col">Mô tả</th>
+                    <th scope="col">Mức lương</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @{
+                    foreach (var item in Model.TinViecLams)
+                    {
+
+                        var congty = Model.CongTys.Find(y => y.ID_CongTy == item.ID_CongTy);
+                        var ThanhPho = Model.ThanhPhos.Find(x => x.ID_ThanhPho == congty.ID_ThanhPho);
+                        <tr>
+                            <td>
+                                <a href="job-single.html"></a>
+                                <div class="job-listing-logo">
+                                    <strong> @Html.ActionLink(@congty.TenCongTy, "DetailIndex", new { id = item.ID_ViecLam }) </strong>
+
+                                </div>
+                            </td>
+                            <td>
+                                <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                                    <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                                        <h4>@item.TieuDeViecLam</h4>
+                                        <strong>Địa chỉ : @congty.DiaChi</strong>
+                                    </div>
+                                    <div class="job-listing-location mb-3 mb-sm-0 custom-width w-25">
+                                        @ThanhPho.TenThanhPho
+                                        <span class="icon-room"></span>
+                                    </div>
+
+                            <td>
+                                <div class="job-listing-meta">
+                                    <span class="badge badge-danger">@item.MucLuong</span>
+                                </div>
+                            </td>
+            </div>
+            </td>
+            </tr>
+        }
+                }
+                </tbody>
+                </table>
+                </div>
+            </section>
+
+            <section class="py-5 bg-image overlay-primary fixed overlay" style="background-image: url('/Assets/Client/images/hero_1.jpg');">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h2 class="text-white">Looking For A Job?</h2>
+                            <p class="mb-0 text-white lead">Lorem ipsum dolor sit amet consectetur adipisicing elit tempora adipisci impedit.</p>
+                        </div>
+                        <div class="col-md-3 ml-auto">
+                            <a href="#" class="btn btn-warning btn-block btn-lg">Sign Up</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="site-section py-4">
+                <div class="container">
+
+                    <div class="row align-items-center">
+                        <div class="col-12 text-center mt-4 mb-5">
+                            <div class="row justify-content-center">
+                                <div class="col-md-7">
+                                    <h2 class="section-title mb-2">Company We've Helped</h2>
+                                    <p class="lead">Porro error reiciendis commodi beatae omnis similique voluptate rerum ipsam fugit mollitia ipsum facilis expedita tempora suscipit iste</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-lg-3 col-md-6 text-center">
+                            <img src="~/Assets/Client/images/logo_airbnb.svg" alt="Image" class="img-fluid logo-1">
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6 text-center">
+                            <img src="~/Assets/Client/images/logo_paypal.svg" alt="Image" class="img-fluid logo-2">
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6 text-center">
+                            <img src="~/Assets/Client/images/logo_stripe.svg" alt="Image" class="img-fluid logo-3">
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6 text-center">
+                            <img src="~/Assets/Client/images/logo_visa.svg" alt="Image" class="img-fluid logo-4">
+                        </div>
+
+                        <div class="col-6 col-lg-3 col-md-6 text-center">
+                            <img src="~/Assets/Client/images/logo_apple.svg" alt="Image" class="img-fluid logo-5">
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6 text-center">
+                            <img src="~/Assets/Client/images/logo_tinder.svg" alt="Image" class="img-fluid logo-6">
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6 text-center">
+                            <img src="~/Assets/Client/images/logo_sony.svg" alt="Image" class="img-fluid logo-7">
+                        </div>
+                        <div class="col-6 col-lg-3 col-md-6 text-center">
+                            <img src="~/Assets/Client/images/logo_airbnb.svg" alt="Image" class="img-fluid logo-8">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="bg-light pt-5 testimony-full">
+
+                <div class="owl-carousel single-carousel">
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 align-self-center text-center text-lg-left">
+                                <blockquote>
+                                    <p>&ldquo;Soluta quasi cum delectus eum facilis recusandae nesciunt molestias accusantium libero dolores repellat id in dolorem laborum ad modi qui at quas dolorum voluptatem voluptatum repudiandae.&rdquo;</p>
+                                </blockquote>
+                            </div>
+                            <div class="col-lg-6 align-self-end text-center text-lg-right">
+                                <img src="~/Assets/Client/images/person_transparent_2.png" alt="Image" class="img-fluid mb-0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6 align-self-center text-center text-lg-left">
+                                <blockquote>
+                                    <p>&ldquo;Soluta quasi cum delectus eum facilis recusandae nesciunt molestias accusantium libero dolores repellat id in dolorem laborum ad modi qui at quas dolorum voluptatem voluptatum repudiandae.&rdquo;</p>
+                                </blockquote>
+                            </div>
+                            <div class="col-lg-6 align-self-end text-center text-lg-right">
+                                <img src="~/Assets/Client/images/person_transparent.png" alt="Image" class="img-fluid mb-0">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <script>
+                $(document).ready(function () {
+                    $("#MyDataTable1").DataTable();
+                });
+            </script>

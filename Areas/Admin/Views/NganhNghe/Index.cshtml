@@ -1,0 +1,125 @@
+﻿
+@model List<Model.EF.NganhNghe>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header{
+    QUẢN LÝ NGÀNH NGHỀ
+}
+@section jsFooter{
+    <script src="~/scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+}
+
+<div class="row">
+    <!-- ============================================================== -->
+    <!-- bordered table -->
+    <!-- ============================================================== -->
+    <div class="col-lg-8">
+        <div class="card">
+            <h4 class="card-header fas fa-coffee">&nbsp;Thêm Ngành Nghề</h4>
+            <div class="card-body">
+                @using (Html.BeginForm("Create", "NganhNghe", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row">
+                        @Html.Label("Tên Ngành Nghề *", new { @style = "padding-top:7px;" })
+                        <div class="col">
+                            <div class="input-group">
+                                <input type="text" class="form-control " name="TenNganhNghe" id="validationCustomUsername" placeholder="Nhập ngành nghề" aria-describedby="inputGroupPrepend" required>
+                                <div class="invalid-feedback">
+                                    Please choose a username.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <button type="submit" id="btncreate" class="btn btn-primary active btn-sm"><i class="fas fa-plus"></i>&nbsp;Thêm mới</button>
+
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="card">
+            <h4 class="card-header fas fa-coffee">&nbsp; Quản Lý Ngành Nghề</h4>
+            <div class="card-body">
+                <table class="display" id="MyDataTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">STT</th>
+                            <th scope="col">Danh sách Ngành Nghề</th>
+                            <th scope="col">Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var count = 1;
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            foreach (var item in Model)
+                            {
+                                <tr id="row_@item.ID_NganhNghe">
+
+                                    <td>@(count++)</td>
+
+                                    @using (Html.BeginForm("Edit", "NganhNghe", FormMethod.Post))
+                                    {
+                                        <td>
+                                            <span hidden>
+                                                @item.TenNganhNghe
+                                            </span>
+                                            <input type="hidden" name="ID_NganhNghe" value="@item.ID_NganhNghe" />
+                                            <input type="text" value="@item.TenNganhNghe" name="TenNganhNghe" class="col-lg-8" />
+                                        </td>
+                                        <td>
+                                            <button type="submit" class="btn btn-success btn-sm" data-id="capNhatArea"><i class="fas fa-edit"></i>&nbsp;Cập nhật</button>
+
+                                            &nbsp;|&nbsp;
+                                            <a class="btn btn-warning btn-sm" id="@item.ID_NganhNghe" onclick="clik(@item.ID_NganhNghe)" style="color:white;"><i class="fas fa-trash-alt"></i>&nbsp;Xóa</a>
+
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#MyDataTable").DataTable();
+    });
+    function clik(id) {
+        var iddelete =
+            {
+                id: id
+            }
+        var x = confirm("Bạn có muốn xóa bản ghi?");
+        if (x) {
+            $.ajax({
+                url: '@Url.Action("Delete", "NganhNghe")',
+                type: 'POST',
+                data: iddelete,
+                OnComplete: function () {
+                    OnComplete: "$('#row_" + id + "').remove()"
+                },
+                success: function () {
+                    window.location.reload();
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        }
+    }
+</script>

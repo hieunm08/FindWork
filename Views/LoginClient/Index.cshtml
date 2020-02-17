@@ -1,0 +1,59 @@
+﻿@model TimKiemViecLam.Areas.Admin.Models.LoginModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="section-hero overlay inner-page bg-image" style="background-image: url(../../Assets/Client/images/hero_1.jpg);" id="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1 class="text-white font-weight-bold">Sign Up/Login</h1>
+                <div class="custom-breadcrumbs">
+                    <a href="#">Home</a> <span class="mx-2 slash">/</span>
+                    <span class="text-white"><strong>Log In</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="site-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+            </div>
+            <div class="col-lg-4">
+                <h2 class="mb-4" style="text-align:center">Log In To JobBoard</h2>
+                <div class="card-body">
+                    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                    {
+                        @Html.ValidationSummary(false, "", new { @class = "" });
+                        <div class="row form-group">
+                            <div class="col-md-12 mb-3 mb-md-0">
+                                <label class="text-black" for="fname">UserName</label>
+                                @Html.TextBoxFor(model => model.UserName, new { @class = "form-control form-control-lg", @placeholder = "Tên đăng nhập", @autocomplete = "off", @type = "text" })
+                            </div>
+                        </div>
+                        <div class="row form-group mb-4">
+                            <div class="col-md-12 mb-3 mb-md-0">
+                                <label class="text-black" for="fname">Password</label>
+                                @Html.TextBoxFor(model => model.PassWord, new { @class = "form-control form-control-lg", @type = "Password", @placeholder = "Mật khẩu" })
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Đăng nhập</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-lg-4">
+                </div>
+
+            </div>
+    </div>
+</section>
+
