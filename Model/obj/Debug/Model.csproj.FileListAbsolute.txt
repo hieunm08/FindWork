@@ -28,3 +28,10 @@ D:\Project\VietnamWork\Model\obj\Debug\Model.csprojAssemblyReference.cache
 D:\Project\VietnamWork\Model\obj\Debug\Model.csproj.CopyComplete
 D:\Project\VietnamWork\Model\obj\Debug\Model.dll
 D:\Project\VietnamWork\Model\obj\Debug\Model.pdb
+D:\Project\test\FindWork\Model\bin\Debug\Model.dll.config
+D:\Project\test\FindWork\Model\bin\Debug\Model.dll
+D:\Project\test\FindWork\Model\bin\Debug\Model.pdb
+D:\Project\test\FindWork\Model\obj\Debug\Model.csproj.CopyComplete
+D:\Project\test\FindWork\Model\obj\Debug\Model.dll
+D:\Project\test\FindWork\Model\obj\Debug\Model.pdb
+D:\Project\test\FindWork\Model\obj\Debug\Model.csprojAssemblyReference.cache

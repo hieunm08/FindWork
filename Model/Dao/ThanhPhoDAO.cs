@@ -1,6 +1,9 @@
 ﻿using Model.EF;
 using System;
+using System.Configuration;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +22,17 @@ namespace Model.Dao
         public List<ThanhPho> dsThanhPho()
         {
             return db.ThanhPhoes.ToList();
+        }
+
+        public DataTable LayDsThanhPho()
+        {
+            string constr = ConfigurationManager.ConnectionStrings["TimKiemViecLam"].ToString();
+            SqlConnection _con = new SqlConnection(constr);
+            SqlDataAdapter _da = new SqlDataAdapter("Select * From ThanhPho", constr);
+            DataTable _dt = new DataTable();
+            _da.Fill(_dt);
+            return _dt;
+
         }
 
         public bool LuuTP(ThanhPho thanhPho)

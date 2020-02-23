@@ -49,6 +49,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accessibility">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\Accessibility.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -147,6 +150,7 @@
     <Compile Include="Areas\Admin\Models\UserModel.cs" />
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Common\UserSession.cs" />
+    <Compile Include="Controllers\CongTyController.cs" />
     <Compile Include="Controllers\CvUngVienController.cs" />
     <Compile Include="Controllers\HomeClientController.cs" />
     <Compile Include="Controllers\LoginClientController.cs" />
@@ -591,6 +595,7 @@
     <Content Include="Assets\Client1\webfonts\fa-solid-900.svg" />
     <Content Include="Assets\Client\css\animate.min.css" />
     <Content Include="Assets\Client\css\bootstrap-select.min.css" />
+    <Content Include="Assets\Client\css\Congty\congty.css" />
     <Content Include="Assets\Client\css\custom-bs.css" />
     <Content Include="Assets\Client\css\jquery.fancybox.min.css" />
     <Content Include="Assets\Client\css\owl.carousel.min.css" />
@@ -650,6 +655,7 @@
     <Content Include="Assets\Client\images\sq_img_9.jpg" />
     <Content Include="Assets\Client\js\bootstrap-select.min.js" />
     <Content Include="Assets\Client\js\bootstrap.bundle.min.js" />
+    <Content Include="Assets\Client\js\Congty\congty.js" />
     <Content Include="Assets\Client\js\custom.js" />
     <Content Include="Assets\Client\js\isotope.pkgd.min.js" />
     <Content Include="Assets\Client\js\jquery.animateNumber.min.js" />
@@ -929,6 +935,8 @@
     <Content Include="Views\LoginClient\Index.cshtml" />
     <Content Include="Views\TinViecLam\Index.cshtml" />
     <Content Include="Views\TinViecLam\DetailIndex.cshtml" />
+    <Content Include="Views\CongTy\Index.cshtml" />
+    <Content Include="Views\CongTy\AddOrEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -938,7 +946,6 @@
     <Folder Include="Assets\Admin\vendor\fonts\AlegreyaSans\" />
     <Folder Include="Assets\Admin\vendor\fonts\BeaverFF\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\CongTy\" />
     <Folder Include="Views\CvUngVien\" />
     <Folder Include="Views\HomeClient\" />
     <Folder Include="Views\TuyenDung\" />
@@ -958,7 +965,7 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj">
+    <ProjectReference Include="Model\Model.csproj">
       <Project>{3843f512-a786-4be1-8ad1-3c34b26fd9c5}</Project>
       <Name>Model</Name>
     </ProjectReference>

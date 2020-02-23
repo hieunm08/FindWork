@@ -48,6 +48,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -92,6 +93,7 @@
     <Compile Include="ViewModel\CongTyModel.cs" />
     <Compile Include="ViewModel\CV_UngVienModel.cs" />
     <Compile Include="ViewModel\DangKyModel.cs" />
+    <Compile Include="ViewModel\DangTuyenDungModel.cs" />
     <Compile Include="ViewModel\HomeView.cs" />
     <Compile Include="ViewModel\KinhNghiemModel..cs" />
     <Compile Include="ViewModel\LoaiTaiKhoanModel..cs" />
@@ -111,6 +113,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
